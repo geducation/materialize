@@ -150,22 +150,13 @@
       textareaAutoResize($(this));
     });
 
-
-    // File Input Path
-    $('.file-field').each(function() {
-      var path_input = $(this).find('input.file-path');
-      $(this).find('input[type="file"]').change(function () {
-        var files = $(this)[0].files;
-        var file_names = [];
-        for (var i=0; i < files.length; i++) {
-          file_names.push(files[i].name);
-        }
-        path_input.val(file_names.join(", "));
-        path_input.trigger('change');
-      });
-    });
-
-
+  // File Input Path
+  $(document).on('change', '.file-field input[type="file"]', function () {
+		var file_field = $(this).closest('.file-field');
+		var path_input = file_field.find('input.file-path');
+		path_input.val($(this)[0].files[0].name);
+		path_input.trigger('change');
+	});
 
     /****************
     *  Range Input  *
